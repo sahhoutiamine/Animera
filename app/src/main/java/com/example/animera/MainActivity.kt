@@ -1,8 +1,9 @@
 package com.example.animera
 
-import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import android.content.Intent
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -12,6 +13,7 @@ import com.example.animera.databinding.ActivityMainBinding
 import com.example.animera.ui.adapter.AnimeAdapter
 import com.example.animera.ui.viewmodel.AnimeListViewModel
 import com.example.animera.ui.viewmodel.UiState
+import com.example.animera.ui.AnimeDetailActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,8 +40,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         animeAdapter = AnimeAdapter { anime ->
-            // Future: open detail screen
-            Toast.makeText(this, anime.title, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, AnimeDetailActivity::class.java).apply {
+                putExtra("DETAIL_URL", anime.detailUrl)
+            }
+            startActivity(intent)
         }
 
         val spanCount = 2

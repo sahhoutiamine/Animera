@@ -25,6 +25,10 @@
             </intent-filter>
         </activity>
 
+        <activity 
+            android:name=".ui.AnimeDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Animera"/>
     </application>
 
 </manifest>
