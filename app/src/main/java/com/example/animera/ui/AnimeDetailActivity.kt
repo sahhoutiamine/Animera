@@ -1,5 +1,6 @@
 package com.example.animera.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -49,7 +50,10 @@ class AnimeDetailActivity : AppCompatActivity() {
 
     private fun setupRecyclerViews() {
         episodeAdapter = EpisodeAdapter { episode ->
-            Toast.makeText(this, "Watching ${episode.title}", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, EpisodePlayerActivity::class.java).apply {
+                putExtra("EPISODE_URL", episode.watchUrl)
+            }
+            startActivity(intent)
         }
         binding.rvEpisodes.apply {
             layoutManager = LinearLayoutManager(this@AnimeDetailActivity)
