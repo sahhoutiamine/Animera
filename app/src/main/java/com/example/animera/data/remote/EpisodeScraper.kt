@@ -43,6 +43,8 @@ class EpisodeScraper {
         val servers = mutableListOf<VideoServer>()
         doc.select(".server-list li a").forEach { a ->
             val name = a.text().trim()
+            if (name.lowercase().contains("google")) return@forEach
+            
             val encodedUrl = a.attr("data-url").trim()
             val type = a.attr("data-type").trim()
             if (encodedUrl.isNotEmpty()) {

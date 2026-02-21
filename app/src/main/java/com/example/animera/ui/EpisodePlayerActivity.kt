@@ -51,6 +51,9 @@ class EpisodePlayerActivity : AppCompatActivity() {
         }
     }
 
+    private var customView: View? = null
+    private var customViewCallback: WebChromeClient.CustomViewCallback? = null
+
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupWebView() {
         binding.webView.apply {
@@ -59,14 +62,65 @@ class EpisodePlayerActivity : AppCompatActivity() {
             settings.loadWithOverviewMode = true
             settings.useWideViewPort = true
             settings.mediaPlaybackRequiresUserGesture = false
+            settings.setSupportMultipleWindows(true)
+            settings.allowFileAccess = true
             
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                    // Prevent WebView from opening external browsers for the initial load
                     return false
                 }
             }
-            webChromeClient = WebChromeClient()
+            
+            webChromeClient = object : WebChromeClient() {
+                override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
+                    if (customView != null) {
+                        callback?.onCustomViewHidden()
+                        return
+                    }
+                    
+                    customView = view
+                    customViewCallback = callback
+                    
+                    binding.fullscreenContainer.addView(view)
+                    binding.fullscreenContainer.visibility = View.VISIBLE
+                    // Hide other UI elements
+                    toggleSystemUI(true)
+                }
+
+                override fun onHideCustomView() {
+                    if (customView == null) return
+                    
+                    binding.fullscreenContainer.removeView(customView)
+                    binding.fullscreenContainer.visibility = View.GONE
+                    
+                    customView = null
+                    customViewCallback?.onCustomViewHidden()
+                    
+                    toggleSystemUI(false)
+                }
+            }
+        }
+    }
+
+    private fun toggleSystemUI(fullscreen: Boolean) {
+        if (fullscreen) {
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+            supportActionBar?.hide()
+            requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+        } else {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+            supportActionBar?.show()
+            requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER
+        }
+    }
+
+    override fun onBackPressed() {
+        if (customView != null) {
+            binding.webView.webChromeClient?.onHideCustomView()
+        } else {
+            super.onBackPressed()
         }
     }
 
