@@ -29,4 +29,9 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    
+    <!-- New Colors -->
+    <color name="search_bar_bg">#25253A</color>
+    <color name="featured_overlay">#CC000000</color>
+    <color name="rating_gold">#FFD700</color>
 </resources>

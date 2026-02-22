@@ -26,19 +26,35 @@ class AnimeListViewModel : ViewModel() {
     private val _animeList = MutableLiveData<List<Anime>>(emptyList())
     val animeList: LiveData<List<Anime>> = _animeList
 
+    private val _featuredAnime = MutableLiveData<Anime?>()
+    val featuredAnime: LiveData<Anime?> = _featuredAnime
+
     private var currentPage = 0
     private var hasNextPage = true
     private var isLoading = false
+    private var currentSearchQuery: String? = null
 
     init {
-        loadFirstPage()
+        loadHomeData()
     }
 
-    fun loadFirstPage() {
+    fun loadHomeData() {
         if (isLoading) return
         currentPage = 0
         hasNextPage = true
+        currentSearchQuery = null
         _animeList.value = emptyList()
+        
+        loadNextPage()
+    }
+
+    fun searchAnime(query: String) {
+        if (isLoading) return
+        currentPage = 0
+        hasNextPage = true
+        currentSearchQuery = query.ifEmpty { null }
+        _animeList.value = emptyList()
+        
         loadNextPage()
     }
 
@@ -52,12 +68,25 @@ class AnimeListViewModel : ViewModel() {
         _uiState.value = if (isFirstLoad) UiState.Loading else UiState.LoadingMore
 
         viewModelScope.launch {
-            val result = repository.getAnimePage(nextPage)
+            val result = if (currentSearchQuery != null) {
+                repository.searchAnime(currentSearchQuery!!, nextPage)
+            } else {
+                repository.getAnimePage(nextPage)
+            }
+
             result.onSuccess { animePage ->
                 currentPage = animePage.currentPage
                 hasNextPage = animePage.hasNextPage
+                
                 val currentList = _animeList.value ?: emptyList()
-                val newList = currentList + animePage.animeList
+                val fetchedList = animePage.animeList
+                
+                // If it's the very first load and no search, pick a random featured anime
+                if (isFirstLoad && currentSearchQuery == null && fetchedList.isNotEmpty()) {
+                    _featuredAnime.value = fetchedList.shuffled().first()
+                }
+
+                val newList = currentList + fetchedList
                 _animeList.value = newList
                 _uiState.value = UiState.Success(newList, hasNextPage)
             }.onFailure { error ->

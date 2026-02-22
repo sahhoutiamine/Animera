@@ -32,15 +32,24 @@ class AnimeScraper {
 
     fun fetchAnimePage(page: Int): AnimePage {
         val url = if (page == 1) BASE_URL else "${BASE_URL}page/$page/"
+        return fetchFromUrl(url, page)
+    }
 
-        val request = Request.Builder()
-            .url(url)
-            .build()
+    fun searchAnime(query: String, page: Int): AnimePage {
+        // Search usually works with ?s=query
+        val url = if (page == 1) {
+            "https://wb.animeluxe.org/?s=$query"
+        } else {
+            "https://wb.animeluxe.org/page/$page/?s=$query"
+        }
+        return fetchFromUrl(url, page)
+    }
 
+    private fun fetchFromUrl(url: String, page: Int): AnimePage {
+        val request = Request.Builder().url(url).build()
         val response = client.newCall(request).execute()
         val html = response.body?.string() ?: throw Exception("Empty response body")
         response.close()
-
         return parseHtml(html, page)
     }
 
@@ -98,24 +107,24 @@ class AnimeScraper {
         }
 
         // Check if there's a next page in the pagination
-        val pagination = doc.selectFirst("ul.pagination")
-        val hasNextPage = pagination?.selectFirst("a[href*=\"/page/\"]") != null ||
-                pagination?.children()?.any { el ->
-                    el.selectFirst("a") != null &&
-                            el.selectFirst("a")?.attr("href")?.contains("/page/") == true
-                } == true
+        val pagination = doc.selectFirst("ul.pagination, div.menu-pagination")
+        val hasNextPage = pagination?.select("a")?.any { a ->
+            val text = a.text().lowercase()
+            text.contains("next") || text.contains("التالي") || text.contains("»")
+        } ?: false
 
-        // More precise check: look for a page number greater than current
-        val hasNext = pagination?.select("a")?.any { a ->
+        // fallback to checking for a higher page number
+        val hasHigherPage = pagination?.select("a")?.any { a ->
             val href = a.attr("href")
             val pageMatch = Regex("""/page/(\d+)/""").find(href)
-            pageMatch?.groupValues?.get(1)?.toIntOrNull()?.let { it > page } ?: false
+            val pNum = pageMatch?.groupValues?.get(1)?.toIntOrNull()
+            pNum != null && pNum > page
         } ?: false
 
         return AnimePage(
             animeList = animeList,
             currentPage = page,
-            hasNextPage = hasNext || hasNextPage
+            hasNextPage = hasNextPage || hasHigherPage
         )
     }
 }

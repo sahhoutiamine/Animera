@@ -9,14 +9,21 @@ class AnimeRepository {
 
     private val scraper = AnimeScraper()
 
-    suspend fun getAnimePage(page: Int): Result<AnimePage> {
-        return withContext(Dispatchers.IO) {
-            try {
-                val animePage = scraper.fetchAnimePage(page)
-                Result.success(animePage)
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
+    suspend fun getAnimePage(page: Int): Result<AnimePage> = withContext(Dispatchers.IO) {
+        try {
+            val animePage = scraper.fetchAnimePage(page)
+            Result.success(animePage)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun searchAnime(query: String, page: Int): Result<AnimePage> = withContext(Dispatchers.IO) {
+        try {
+            val animePage = scraper.searchAnime(query, page)
+            Result.success(animePage)
+        } catch (e: Exception) {
+            Result.failure(e)
         }
     }
 }
