@@ -88,28 +88,73 @@ class AnimeDetailActivity : AppCompatActivity() {
                     binding.tvDetailType.text = detail.type
                     binding.tvDetailStatus.text = detail.status
                     binding.tvDetailStudio.text = detail.studio
+                    binding.tvDetailSeason.text = detail.season
+                    binding.tvDetailSource.text = detail.source
+                    binding.tvDetailYear.text = detail.year
+                    binding.tvEpCount.text = "${detail.episodes.size} Episodes"
 
-                    // Load banner/cover
+                    // Load banner image with smart fallback and atmospheric effect
+                    val isGeneric = detail.bannerUrl.contains("banner.jpg")
+                    val hasActualBanner = detail.bannerUrl.isNotEmpty() && !isGeneric
+                    
+                    binding.ivBanner.scaleType = android.widget.ImageView.ScaleType.CENTER_CROP
+                    
+                    if (hasActualBanner) {
+                        // Actual Wide Banner: Clear and bright
+                        binding.ivBanner.clearColorFilter()
+                        Glide.with(this)
+                            .load(detail.bannerUrl)
+                            .placeholder(R.drawable.placeholder_anime)
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(binding.ivBanner)
+                    } else {
+                        // Poster as Banner: Apply Dark Atmosphere Effect
+                        binding.ivBanner.setColorFilter(android.graphics.Color.parseColor("#BB000000"), android.graphics.PorterDuff.Mode.SRC_ATOP)
+                        Glide.with(this)
+                            .load(detail.coverImageUrl)
+                            .placeholder(R.drawable.placeholder_anime)
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(binding.ivBanner)
+                    }
+                        
+                    // Load clear floating poster (The main reference)
                     Glide.with(this)
                         .load(detail.coverImageUrl)
                         .placeholder(R.drawable.placeholder_anime)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .centerCrop()
-                        .into(binding.ivBanner)
+                        .into(binding.ivPoster)
 
                     // Genres
                     binding.chipGroupGenres.removeAllViews()
                     detail.genres.forEach { genre ->
                         val chip = Chip(this).apply {
                             text = genre
-                            setChipBackgroundColorResource(R.color.accent_purple)
+                            setChipBackgroundColorResource(R.color.bg_surface)
                             setTextColor(getColor(R.color.white))
+                            chipStrokeWidth = 0f
                         }
                         binding.chipGroupGenres.addView(chip)
                     }
 
                     episodeAdapter.submitList(detail.episodes)
                     relatedAdapter.submitList(detail.relatedAnime)
+
+                    // Action Buttons
+                    binding.btnTrailer.visibility = if (detail.trailerUrl.isNotEmpty()) View.VISIBLE else View.GONE
+                    binding.btnMal.visibility = if (detail.malUrl.isNotEmpty()) View.VISIBLE else View.GONE
+
+                    binding.btnTrailer.setOnClickListener {
+                        if (detail.trailerUrl.isNotEmpty()) {
+                            startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(detail.trailerUrl)))
+                        }
+                    }
+
+                    binding.btnMal.setOnClickListener {
+                        if (detail.malUrl.isNotEmpty()) {
+                            startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(detail.malUrl)))
+                        }
+                    }
                 }
                 is DetailUiState.Error -> {
                     binding.loadingLayout.visibility = View.GONE

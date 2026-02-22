@@ -34,4 +34,8 @@
     <color name="search_bar_bg">#25253A</color>
     <color name="featured_overlay">#CC000000</color>
     <color name="rating_gold">#FFD700</color>
+    
+    <!-- Brand Colors -->
+    <color name="youtube_red">#FF0000</color>
+    <color name="mal_blue">#2E51A2</color>
 </resources>

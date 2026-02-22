@@ -42,6 +42,15 @@ class AnimeDetailScraper {
         val title = doc.selectFirst("div.media-title h1")?.text()?.trim() ?: ""
         val altTitle = doc.selectFirst("div.media-title h3")?.text()?.trim() ?: ""
 
+        // ── Banner Image ──────────────────────────────────────────────────────
+        val bannerEl = doc.selectFirst(".head-box .banner")
+        var bannerUrl = bannerEl?.attr("data-src")?.trim() ?: ""
+        if (bannerUrl.isEmpty()) {
+            val style = bannerEl?.attr("style") ?: ""
+            val regex = Regex("""url\("?([^"')]+)"?\)""")
+            bannerUrl = regex.find(style)?.groupValues?.get(1) ?: ""
+        }
+
         // ── Cover Image ───────────────────────────────────────────────────────
         val coverEl = doc.selectFirst("aside .anime-card .image")
         var coverImageUrl = coverEl?.attr("data-src")?.trim() ?: ""
@@ -107,8 +116,6 @@ class AnimeDetailScraper {
             // Extract episode number from title (e.g. "الحلقة 4")
             val numberMatch = Regex("""(\d+)""").find(rawTitle)
             val number = numberMatch?.groupValues?.get(1) ?: ""
-            val epTitle = rawTitle.split(" ").firstOrNull { it.any { c -> c.isDigit() } }
-                ?.let { rawTitle } ?: rawTitle
 
             episodes.add(Episode(number = number, title = rawTitle, thumbnailUrl = thumbnailUrl, watchUrl = watchUrl))
         }
@@ -145,6 +152,7 @@ class AnimeDetailScraper {
             title = title,
             altTitle = altTitle,
             coverImageUrl = coverImageUrl,
+            bannerUrl = bannerUrl,
             status = status,
             statusClass = statusClass,
             type = type,

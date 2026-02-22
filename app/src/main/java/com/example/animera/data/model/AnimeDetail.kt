@@ -4,6 +4,7 @@ data class AnimeDetail(
     val title: String,
     val altTitle: String,
     val coverImageUrl: String,
+    val bannerUrl: String,
     val status: String,
     val statusClass: String,       // "airing" | "finished"
     val type: String,
