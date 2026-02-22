@@ -205,14 +205,12 @@ class MainActivity : AppCompatActivity() {
     private fun populateFeatured(anime: Anime) {
         binding.tvFeaturedTitle.text = anime.title
         binding.tvFeaturedStatus.text = anime.status
-        binding.tvFeaturedRating.text = "4.9" // Mock rating if not scraped
         
         Glide.with(this)
             .load(anime.imageUrl)
             .placeholder(R.drawable.placeholder_anime)
             .into(binding.ivFeaturedImage)
             
-        binding.btnWatchNow.setOnClickListener { openDetail(anime) }
         binding.cvFeatured.setOnClickListener { openDetail(anime) }
     }
 

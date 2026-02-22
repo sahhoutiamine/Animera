@@ -178,50 +178,7 @@
                                         android:ellipsize="end"
                                         tools:text="Solo Leveling: Arise"/>
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="8dp"
-                                        android:orientation="horizontal"
-                                        android:gravity="center_vertical">
 
-                                        <LinearLayout
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:orientation="horizontal">
-
-                                            <ImageView
-                                                android:layout_width="14dp"
-                                                android:layout_height="14dp"
-                                                android:src="@drawable/ic_play_circle"
-                                                android:tint="@color/rating_gold"/>
-
-                                            <TextView
-                                                android:id="@+id/tvFeaturedRating"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginStart="4dp"
-                                                android:textColor="@color/rating_gold"
-                                                android:textSize="12sp"
-                                                tools:text="4.9"/>
-
-                                        </LinearLayout>
-
-                                        <Button
-                                            android:id="@+id/btnWatchNow"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="32dp"
-                                            android:text="شاهد الآن"
-                                            android:textColor="@color/white"
-                                            android:textSize="12sp"
-                                            android:paddingHorizontal="16dp"
-                                            android:backgroundTint="@color/accent_purple"
-                                            android:insetTop="0dp"
-                                            android:insetBottom="0dp"
-                                            style="@style/Widget.Material3.Button"/>
-
-                                    </LinearLayout>
 
                                 </LinearLayout>
 

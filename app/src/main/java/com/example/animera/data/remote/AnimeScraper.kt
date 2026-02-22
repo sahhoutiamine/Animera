@@ -93,6 +93,10 @@ class AnimeScraper {
                 else -> "unknown"
             }
 
+            // Rating
+            val ratingElement = card.selectFirst("a.rating")
+            val rating = ratingElement?.ownText()?.trim() ?: "N/A"
+
             animeList.add(
                 Anime(
                     title = title,
@@ -101,7 +105,8 @@ class AnimeScraper {
                     type = type,
                     year = year,
                     status = status,
-                    statusClass = statusClass
+                    statusClass = statusClass,
+                    rating = rating
                 )
             )
         }

@@ -7,5 +7,6 @@ data class Anime(
     val type: String,
     val year: String,
     val status: String,
-    val statusClass: String // "airing" or "finished"
+    val statusClass: String, // "airing" or "finished"
+    val rating: String       // e.g. "8.7"
 )
