@@ -166,7 +166,10 @@ class EpisodePlayerActivity : AppCompatActivity() {
 
     private fun populateUi(info: EpisodePlayerInfo) {
         binding.tvEpisodeTitle.text = info.title
-        binding.toolbar.title = info.title
+        
+        // Hide toolbar title if we have the detail title below to avoid redundancy
+        supportActionBar?.title = "" 
+        binding.toolbar.title = ""
 
         serverAdapter.submitList(info.servers)
         episodeNavAdapter.submitList(info.episodes)

@@ -8,17 +8,47 @@
     android:background="@color/bg_dark">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/bg_dark">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/text_primary"
-            app:navigationIcon="@drawable/ic_back"
-            app:navigationIconTint="@color/text_primary"/>
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Video Player Container -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    app:cardCornerRadius="0dp"
+                    app:cardBackgroundColor="@color/black"
+                    app:strokeWidth="0dp">
+
+                    <WebView
+                        android:id="@+id/webView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/black"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:navigationIcon="@drawable/ic_back"
+                    app:navigationIconTint="@color/white"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,61 +61,72 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="40dp">
 
-            <!-- Video Player Area -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                app:cardCornerRadius="12dp"
-                app:cardBackgroundColor="@color/black"
-                app:strokeWidth="0dp">
-
-                <WebView
-                    android:id="@+id/webView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/black"/>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:id="@+id/tvEpisodeTitle"
+            <!-- Episode Info -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="Episode 1 Title"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_status_airing"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="Now Playing"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvEpisodeTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="Episode 1: The Beginning"/>
+
+            </LinearLayout>
 
             <!-- Navigation Controls -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:gravity="center">
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPrev"
-                    style="@style/Widget.Material3.Button.TonalButton"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="54dp"
                     android:layout_weight="1"
-                    android:text="Previous"
                     android:layout_marginEnd="8dp"
-                    android:enabled="false"/>
+                    android:text="السابق"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/ic_back"
+                    app:iconGravity="textStart"
+                    app:backgroundTint="@color/bg_surface"
+                    android:textColor="@color/white"
+                    style="@style/Widget.Material3.Button"/>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnNext"
-                    style="@style/Widget.Material3.Button.TonalButton"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="54dp"
                     android:layout_weight="1"
-                    android:text="Next"
-                    android:layout_marginStart="8dp"
-                    android:enabled="false"/>
+                    android:text="التالي"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/ic_play_circle"
+                    app:iconGravity="textStart"
+                    app:backgroundTint="@color/accent_purple"
+                    android:textColor="@color/white"
+                    style="@style/Widget.Material3.Button"/>
 
             </LinearLayout>
 
@@ -93,17 +134,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Available Servers"
-                android:textColor="@color/accent_purple"
-                android:textSize="14sp"
+                android:layout_marginTop="32dp"
+                android:text="Servers"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
                 android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvServers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
+                android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_server_chip"/>
 
@@ -111,17 +155,19 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Other Episodes"
-                android:textColor="@color/accent_purple"
-                android:textSize="14sp"
+                android:layout_marginTop="32dp"
+                android:text="Playlist"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
                 android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEpisodes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_episode_nav"/>
 
@@ -129,14 +175,13 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Loading State -->
+    <!-- Loading Overlay -->
     <FrameLayout
         android:id="@+id/loadingLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_dark"
-        android:visibility="gone"
-        tools:visibility="visible">
+        android:visibility="gone">
 
         <ProgressBar
             android:layout_width="wrap_content"
