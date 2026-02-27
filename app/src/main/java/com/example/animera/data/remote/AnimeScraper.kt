@@ -36,11 +36,11 @@ class AnimeScraper {
     }
 
     fun searchAnime(query: String, page: Int): AnimePage {
-        // Search usually works with ?s=query
+        val encodedQuery = java.net.URLEncoder.encode(query, "UTF-8")
         val url = if (page == 1) {
-            "https://wb.animeluxe.org/?s=$query"
+            "https://wb.animeluxe.org/?s=$encodedQuery"
         } else {
-            "https://wb.animeluxe.org/page/$page/?s=$query"
+            "https://wb.animeluxe.org/page/$page/?s=$encodedQuery"
         }
         return fetchFromUrl(url, page)
     }
@@ -58,8 +58,8 @@ class AnimeScraper {
 
         val animeList = mutableListOf<Anime>()
 
-        // Parse each anime card: .box-5x1 .anime-card
-        val cards = doc.select(".box-5x1 .anime-card")
+        // Parse each anime card: can be .anime-card (home) or .search-card (search results)
+        val cards = doc.select(".anime-card, .search-card")
         for (card in cards) {
             // Title & URL
             val titleElement = card.selectFirst("div.info a h3") ?: continue
@@ -68,14 +68,19 @@ class AnimeScraper {
             val linkElement = card.selectFirst("div.info a") ?: continue
             val detailUrl = linkElement.attr("href").trim()
 
-            // Image URL – prefer data-src (lazy loaded), fallback to style background-image
+            // Image URL – prefer data-src (lazy loaded), fallback to style background-image or src
+            var imageUrl = ""
             val imageElement = card.selectFirst("a.image")
-            var imageUrl = imageElement?.attr("data-src")?.trim() ?: ""
-            if (imageUrl.isEmpty()) {
-                // Try to parse from style attribute: background-image: url("...")
-                val style = imageElement?.attr("style") ?: ""
-                val regex = Regex("""url\("?([^"')]+)"?\)""")
-                imageUrl = regex.find(style)?.groupValues?.get(1) ?: ""
+            if (imageElement != null) {
+                imageUrl = imageElement.attr("data-src").trim()
+                if (imageUrl.isEmpty()) {
+                    val style = imageElement.attr("style")
+                    val regex = Regex("""url\("?([^"')]+)"?\)""")
+                    imageUrl = regex.find(style)?.groupValues?.get(1) ?: ""
+                }
+                if (imageUrl.isEmpty()) {
+                    imageUrl = imageElement.selectFirst("img")?.attr("src")?.trim() ?: ""
+                }
             }
 
             // Type and Year
