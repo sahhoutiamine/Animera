@@ -56,6 +56,8 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.swiperefreshlayout)
+    implementation(libs.shimmer)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
