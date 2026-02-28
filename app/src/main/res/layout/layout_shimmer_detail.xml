@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shimmerDetail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:shimmer_auto_start="true"
+    app:shimmer_base_alpha="0.3"
+    app:shimmer_duration="1200"
+    app:shimmer_highlight_alpha="0.6">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Banner Shimmer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:background="@color/shimmer_base" />
+
+            <!-- Poster & Title Shimmer -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-80dp"
+                android:paddingHorizontal="16dp">
+
+                <View
+                    android:id="@+id/shimmer_poster"
+                    android:layout_width="110dp"
+                    android:layout_height="160dp"
+                    android:background="@drawable/bg_shimmer_rect" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/shimmer_poster"
+                    android:layout_alignBottom="@id/shimmer_poster"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:background="@drawable/bg_shimmer_rect" />
+
+                    <View
+                        android:layout_width="150dp"
+                        android:layout_height="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_shimmer_rect" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- Metadata Cards Shimmer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_shimmer_rect" />
+
+            <!-- Synopsis Shimmer -->
+            <View
+                android:layout_width="200dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_shimmer_rect" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_shimmer_rect" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

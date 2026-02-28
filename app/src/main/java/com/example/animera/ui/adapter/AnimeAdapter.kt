@@ -80,8 +80,11 @@ class AnimeAdapter(
             binding.tvType.text = anime.type
             binding.tvYear.text = anime.year
             binding.tvStatus.text = anime.status
+            binding.tvRating.text = anime.rating
+            
             val statusBg = if (anime.statusClass == "airing") R.drawable.bg_status_airing else R.drawable.bg_status_finished
             binding.tvStatus.setBackgroundResource(statusBg)
+            
             Glide.with(binding.ivPoster).load(anime.imageUrl).placeholder(R.drawable.placeholder_anime)
                 .transition(DrawableTransitionOptions.withCrossFade()).centerCrop().into(binding.ivPoster)
             binding.root.setOnClickListener { onAnimeClick(anime) }
@@ -94,7 +97,6 @@ class AnimeAdapter(
             binding.tvTitle.text = anime.title
             binding.tvType.text = anime.type
             binding.tvYear.text = anime.year
-            binding.tvStatus.text = anime.status
             val statusBg = if (anime.statusClass == "airing") R.drawable.bg_status_airing else R.drawable.bg_status_finished
             binding.tvStatus.setBackgroundResource(statusBg)
             Glide.with(binding.ivPoster).load(anime.imageUrl).placeholder(R.drawable.placeholder_anime)
@@ -113,6 +115,7 @@ class AnimeAdapter(
             binding.root.setOnClickListener { onAnimeClick(anime) }
         }
     }
+
 
     class LoadingViewHolder(binding: ItemLoadingBinding) : RecyclerView.ViewHolder(binding.root)
 

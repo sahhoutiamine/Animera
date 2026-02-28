@@ -144,45 +144,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardBackgroundColor="@color/bg_surface"
-                app:strokeWidth="0dp">
+                app:cardCornerRadius="24dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:strokeWidth="1dp"
+                app:strokeColor="#1AFFFFFF"
+                app:cardElevation="0dp">
 
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:columnCount="3"
                     android:rowCount="2"
-                    android:padding="16dp">
+                    android:padding="20dp"
+                    android:alignmentMode="alignMargins"
+                    android:useDefaultMargins="true">
 
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="vertical" android:gravity="center">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Type" android:textColor="@color/text_secondary" android:textSize="11sp"/>
-                        <TextView android:id="@+id/tvDetailType" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="13sp" tools:text="TV"/>
-                    </LinearLayout>
-
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="vertical" android:gravity="center">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Season" android:textColor="@color/text_secondary" android:textSize="11sp"/>
-                        <TextView android:id="@+id/tvDetailSeason" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="13sp" tools:text="Winter 2026"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="النوع" android:textColor="@color/text_muted" android:textSize="11sp" android:fontFamily="sans-serif-medium"/>
+                        <TextView android:id="@+id/tvDetailType" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="14sp" tools:text="TV"/>
                     </LinearLayout>
 
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="vertical" android:gravity="center">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Studio" android:textColor="@color/text_secondary" android:textSize="11sp"/>
-                        <TextView android:id="@+id/tvDetailStudio" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="13sp" tools:text="SynergySP"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="الموسم" android:textColor="@color/text_muted" android:textSize="11sp" android:fontFamily="sans-serif-medium"/>
+                        <TextView android:id="@+id/tvDetailSeason" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="14sp" tools:text="Winter 2026"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="الاستوديو" android:textColor="@color/text_muted" android:textSize="11sp" android:fontFamily="sans-serif-medium"/>
+                        <TextView android:id="@+id/tvDetailStudio" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="14sp" tools:text="MAPPA"/>
                     </LinearLayout>
 
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_marginTop="16dp" android:orientation="vertical" android:gravity="center">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Source" android:textColor="@color/text_secondary" android:textSize="11sp"/>
-                        <TextView android:id="@+id/tvDetailSource" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="13sp" tools:text="Novel"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="المصدر" android:textColor="@color/text_muted" android:textSize="11sp" android:fontFamily="sans-serif-medium"/>
+                        <TextView android:id="@+id/tvDetailSource" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="14sp" tools:text="Manga"/>
                     </LinearLayout>
 
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_marginTop="16dp" android:orientation="vertical" android:gravity="center">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Year" android:textColor="@color/text_secondary" android:textSize="11sp"/>
-                        <TextView android:id="@+id/tvDetailYear" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="13sp" tools:text="2026"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="السنة" android:textColor="@color/text_muted" android:textSize="11sp" android:fontFamily="sans-serif-medium"/>
+                        <TextView android:id="@+id/tvDetailYear" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white" android:textStyle="bold" android:textSize="14sp" tools:text="2026"/>
                     </LinearLayout>
 
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_marginTop="16dp" android:orientation="vertical" android:gravity="center">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rating" android:textColor="@color/text_secondary" android:textSize="11sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="N/A" android:textColor="@color/rating_gold" android:textStyle="bold" android:textSize="13sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="التقييم" android:textColor="@color/text_muted" android:textSize="11sp" android:fontFamily="sans-serif-medium"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="8.9" android:textColor="@color/accent_gold" android:textStyle="bold" android:textSize="14sp" tools:text="8.9"/>
                     </LinearLayout>
 
                 </GridLayout>
@@ -198,27 +202,33 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnTrailer"
                     android:layout_width="0dp"
-                    android:layout_height="54dp"
+                    android:layout_height="64dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/youtube_red"
-                    android:text="العرض التشويقي"
-                    app:cornerRadius="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:backgroundTint="@color/accent_purple"
+                    android:text="عرض ترويجي"
+                    android:textColor="@color/white"
+                    app:cornerRadius="16dp"
                     app:icon="@drawable/ic_play_circle"
-                    app:iconSize="20dp"
-                    style="@style/Widget.Material3.Button"/>
+                    app:iconGravity="textStart"
+                    app:iconSize="24dp"
+                    app:iconTint="@color/white"
+                    android:fontFamily="sans-serif-black"
+                    style="@style/Widget.Material3.Button.TonalButton"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMal"
-                    android:layout_width="0dp"
-                    android:layout_height="54dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/mal_blue"
-                    android:text="صفحة MAL"
-                    app:cornerRadius="12dp"
-                    app:icon="@drawable/ic_profile"
-                    app:iconSize="20dp"
-                    style="@style/Widget.Material3.Button"/>
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:backgroundTint="@color/card_bg"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/ic_heart"
+                    app:iconGravity="center"
+                    app:iconSize="24dp"
+                    app:iconTint="@color/accent_pink"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#1AFFFFFF"
+                    style="@style/Widget.Material3.Button.OutlinedButton"/>
 
             </LinearLayout>
 
@@ -227,30 +237,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 app:chipSpacingHorizontal="8dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginHorizontal="16dp"
-                android:text="ملخص القصة"
+                android:text="القصة"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:fontFamily="sans-serif-black"/>
 
             <TextView
                 android:id="@+id/tvSynopsis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="16dp"
                 android:textColor="@color/text_secondary"
-                android:textSize="15sp"
-                android:lineSpacingMultiplier="1.4"
+                android:textSize="16sp"
+                android:lineHeight="28dp"
                 android:gravity="right"
-                tools:text="قصة الاطفاين..."/>
+                android:fontFamily="sans-serif-medium"
+                tools:text="هنا يوضع ملخص قصة الأنمي باللغة العربية مع مراعاة التنسيق والوضوح..."/>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -261,51 +275,58 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Episodes"
+                    android:layout_alignParentEnd="true"
+                    android:text="الحلقات"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-black"/>
 
                 <TextView
                     android:id="@+id/tvEpCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
                     android:textColor="@color/accent_purple"
                     android:textSize="14sp"
-                    tools:text="12 Total"/>
+                    android:fontFamily="sans-serif-medium"
+                    tools:text="12 حلقة"/>
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEpisodes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:paddingHorizontal="8dp"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_episode"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginHorizontal="16dp"
-                android:text="Similar Anime"
+                android:text="أنمي مشابه"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:fontFamily="sans-serif-black"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRelated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:paddingHorizontal="12dp"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_related_anime"/>
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -316,11 +337,8 @@
         android:layout_height="match_parent"
         android:background="@color/bg_dark"
         android:visibility="gone">
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/accent_purple"/>
+        <include layout="@layout/layout_shimmer_detail" />
     </FrameLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

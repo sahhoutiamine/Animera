@@ -3,14 +3,31 @@
     <style name="Base.Theme.Animera" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/accent_purple</item>
         <item name="colorPrimaryContainer">@color/accent_purple_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/accent_blue</item>
+        <item name="colorSecondaryContainer">@color/card_bg</item>
         <item name="colorSurface">@color/bg_surface</item>
         <item name="colorSurfaceVariant">@color/card_bg</item>
         <item name="android:windowBackground">@color/bg_dark</item>
         <item name="android:statusBarColor">@color/bg_dark</item>
         <item name="android:navigationBarColor">@color/bg_dark</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        
+        <!-- Shape -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Animera.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Animera.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Animera.Large</item>
     </style>
 
     <style name="Theme.Animera" parent="Base.Theme.Animera" />
+
+    <style name="ShapeAppearance.Animera.Small" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="ShapeAppearance.Animera.Medium" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="ShapeAppearance.Animera.Large" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">24dp</item>
+    </style>
 </resources>
