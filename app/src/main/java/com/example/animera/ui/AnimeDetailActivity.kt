@@ -91,7 +91,8 @@ class AnimeDetailActivity : AppCompatActivity() {
                     binding.tvDetailSeason.text = detail.season
                     binding.tvDetailSource.text = detail.source
                     binding.tvDetailYear.text = detail.year
-                    binding.tvEpCount.text = "${detail.episodes.size} Episodes"
+                    binding.tvEpCount.text = "${detail.episodes.size} حلقة"
+
 
                     // Load banner image with smart fallback and atmospheric effect
                     val isGeneric = detail.bannerUrl.contains("banner.jpg")
@@ -130,12 +131,17 @@ class AnimeDetailActivity : AppCompatActivity() {
                     detail.genres.forEach { genre ->
                         val chip = Chip(this).apply {
                             text = genre
-                            setChipBackgroundColorResource(R.color.bg_surface)
+                            setChipBackgroundColorResource(R.color.accent_purple)
                             setTextColor(getColor(R.color.white))
                             chipStrokeWidth = 0f
+                            shapeAppearanceModel = shapeAppearanceModel.toBuilder()
+                                .setAllCornerSizes(32f)
+                                .build()
+                            textAlignment = View.TEXT_ALIGNMENT_CENTER
                         }
                         binding.chipGroupGenres.addView(chip)
                     }
+
 
                     episodeAdapter.submitList(detail.episodes)
                     relatedAdapter.submitList(detail.relatedAnime)
