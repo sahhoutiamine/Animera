@@ -182,10 +182,15 @@ class MainActivity : AppCompatActivity() {
             
             when (state) {
                 is UiState.Loading -> {
-                    if (!isExploreMode) binding.progressBar.visibility = View.VISIBLE
+                    if (!isExploreMode) {
+                        binding.shimmerView.visibility = View.VISIBLE
+                        binding.shimmerView.startShimmer()
+                    }
                 }
+
                 is UiState.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.visibility = View.GONE
                     
                     // Always update horizontal adapter with first page items when not searching
                     horizontalAdapter.submitAnimeList(state.animeList.take(20), false)
@@ -194,9 +199,11 @@ class MainActivity : AppCompatActivity() {
                     mainAdapter.submitAnimeList(state.animeList, state.hasNextPage)
                 }
                 is UiState.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.visibility = View.GONE
                     showToast(state.message)
                 }
+
                 else -> {}
             }
         }
